@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using NLWalks.API.Data;
+using NLWalks.API.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,8 @@ builder.Services.AddDbContext<NLWalksDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("NLWalks"));
 });
+builder.Services.AddScoped<IRegionRepository, RegionRepository>();
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 var app = builder.Build();
 
